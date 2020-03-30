@@ -5,7 +5,12 @@
                 <img id="avatar" class="2x" src="{{ .Site.Params.image }}"/>
             </a>
             <h1>{{ .Site.Params.name }}</h1>
+            {{ if .IsHome }}
             <h2>{{ .Site.Params.bio | safeHTML }}</h2>
+            {{ else }}
+            <h2>{{ .Title }}</h2>
+
+            {{ end }}
         </header>
     </section>
 </div>
