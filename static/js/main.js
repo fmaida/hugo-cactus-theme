@@ -16,7 +16,14 @@ function isRetina() {
 	return false;
 };
  
- 
+function show_hide_navbar() {
+    if ($("#nav-mobile-content").is(":visible")) {
+        $("#nav-mobile-content").hide();
+    } else {
+        $("#nav-mobile-content").slideDown();
+    }
+}
+
 function retina() {
 	
 	if (!isRetina())
@@ -33,4 +40,10 @@ function retina() {
 	});
 };
  
-$(document).ready(retina);
+$(document).ready(function() {
+    retina();
+    $("#nav-mobile-content").hide();
+    $("#nav-mobile-control").click(function() {
+        show_hide_navbar();
+    });
+});

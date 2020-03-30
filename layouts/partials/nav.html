@@ -1,4 +1,8 @@
 <nav class="main-nav">
+
+    <!-- Desktop control -->
+
+    <span id="nav-desktop-content">
 	{{ if not .IsHome }}
 		<a href='{{ .Site.BaseURL }}'> <span class="arrow">←</span>{{ .Site.Params.home | default "Home" }}</a>
 	{{ end }}
@@ -26,4 +30,41 @@
 	{{ if .Site.Params.enableRSS }}
 		<a class="cta" href="{{ .Site.RSSLink }}">{{ .Site.Params.subscribe | default "Subscribe" }}</a>
 	{{ end }}
+    </span>
+    
+    
+    <!-- Mobile control -->
+
+    <span id="nav-mobile-control">
+        <i class="fa fa-bars"></i>
+    </span>
+    
+    <section id="nav-mobile-content">
+        <ul>
+	{{ if not .IsHome }}
+    <li><a href='{{ .Site.BaseURL }}'> <span class="arrow">←</span>{{ .Site.Params.home | default "Home" }}</a></li>
+	{{ end }}
+
+	{{ range .Site.Menus.main }}
+    <li><a href='{{ .URL }}'>{{ .Name }}</a></li>
+  	{{ end }}
+    
+    {{ if .Site.IsMultiLingual }}
+	    {{ range .Site.Languages }}
+	        {{ if eq . $.Site.Language }}
+                {{/*<a class="cta" href="#" class="active language">
+                    {{ .LanguageName }}
+                </a> */}}
+	        {{ else }}
+		        {{ range $.Translations }}
+                    <li><a class="cta" href="{{ .Permalink }}" class="">
+                        {{ .Language.LanguageName }}
+                        </a></li>
+		        {{ end }}
+	        {{ end }}
+	    {{ end }}
+    {{ end }}
+    </ul>
+    </section>
+
 </nav>
