@@ -1,15 +1,15 @@
 <div id="social">
 {{ if eq .Site.Params.iconFont "font-awesome" }}
-	
-	{{ range $key, $val := .Site.Social }}
-    <a class="symbol" href="{{ $val }}">
-        <i class="fa fa-{{ $key }}"></i>
+{{ .Site.Params.Social }}	
+	{{ range $name, $url := .Site.Social }}
+    <a class="symbol" href="{{ $url }}">
+        <i class="fa fa-{{ $name }}"></i>
     </a>
     {{ end }}
 
 {{ else }}
 	
-	{{ $iconStyle := .Site.Params.socialIconStyle }}
+	{{ $iconStyle := .Site.socialIconStyle }}
     {{ range $key, $val := .Site.Social }}
     <a class="symbol" href="{{ $val }}">
         {{ $iconStyle }}{{ if eq $key "twitter" }}twitterbird{{ else }}{{ $key }}{{ end }}
