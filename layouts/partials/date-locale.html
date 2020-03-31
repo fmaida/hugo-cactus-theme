@@ -1,0 +1,15 @@
+{{ if eq .Site.Language.Lang "it" }}
+    {{ $mymonths := index $.Site.Data.months_it }}
+    <aside class="dates">
+        {{ .Date.Format "2" }} 
+        {{ index $mymonths (printf "%d" .Date.Month) }}
+        {{ .Date.Format "2006" }}
+    </aside>
+{{ else }}
+    {{ $mymonths := index $.Site.Data.months_en }}
+    <aside class="dates">
+        {{ index $mymonths (printf "%d" .Date.Month) }} 
+        {{ .Date.Format "2" }}, 
+        {{ .Date.Format "2006" }}
+    </aside>
+{{ end }}
