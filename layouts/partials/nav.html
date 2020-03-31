@@ -4,7 +4,9 @@
 
     <span id="nav-desktop-content">
 	{{ if not .IsHome }}
-		<a href='{{ .Site.BaseURL }}'> <span class="arrow">←</span>{{ .Site.Params.home | default "Home" }}</a>
+    <a href='{{ if eq .Site.Language.Lang "it" }}{{ .Site.BaseURL }}{{ else }}{{ .Site.BaseURL }}{{ .Site.Language.Lang }}{{ end }}'>
+        <span class="arrow">←</span>{{ .Site.Params.home | default "Home" }}
+    </a>
 	{{ end }}
 
 	{{ range .Site.Menus.main }}
