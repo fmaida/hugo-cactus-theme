@@ -1,12 +1,22 @@
 <nav class="main-nav">
 
-    <!-- Desktop control -->
+    {{/* ---------------------------------- */}}
+    {{/* Desktop navigation bar             */}}
+    {{/* ---------------------------------- */}}
 
     <span id="nav-desktop-content">
 	{{ if not .IsHome }}
-    <a href='{{ if eq .Site.Language.Lang "it" }}{{ .Site.BaseURL }}{{ else }}{{ .Site.BaseURL }}{{ .Site.Language.Lang }}{{ end }}'>
-        <span class="arrow">←</span>{{ .Site.Params.home | default "Home" }}
-    </a>
+        {{/* If user is reading anything that is not the homepage */}}
+        {{/* adds a link to go back to the homepage */}}
+        {{ if eq .Site.Language.Lang "it" }}
+            {{ $home_url := .Site.BaseURL }}
+            <a href="{{ $home_url }}">
+        {{ else }}
+            {{ $home_url := print .Site.BaseURL .Site.Language.Lang }}
+            <a href="{{ $home_url }}">
+        {{ end }}
+            <span class="arrow">←</span>{{ .Site.Params.home | default "Home" }}
+        </a>
 	{{ end }}
 
 	{{ range .Site.Menus.main }}
@@ -29,13 +39,16 @@
 	    {{ end }}
     {{ end }}
 
+        {{/* Show a RSS Feed button if requested */}}
 	{{ if .Site.Params.enableRSS }}
 		<a class="cta" href="{{ .Site.RSSLink }}">{{ .Site.Params.subscribe | default "Subscribe" }}</a>
 	{{ end }}
     </span>
-    
-    
-    <!-- Mobile control -->
+
+
+    {{/* ---------------------------------- */}}
+    {{/* Mobile navigation bar              */}}
+    {{/* ---------------------------------- */}}
 
     <span id="nav-mobile-control">
         <i class="fa fa-bars"></i>
@@ -53,11 +66,7 @@
     
     {{ if .Site.IsMultiLingual }}
 	    {{ range .Site.Languages }}
-	        {{ if eq . $.Site.Language }}
-                {{/*<a class="cta" href="#" class="active language">
-                    {{ .LanguageName }}
-                </a> */}}
-	        {{ else }}
+	        {{ if ne . $.Site.Language }}
 		        {{ range $.Translations }}
                     <li><a class="cta" href="{{ .Permalink }}" class="">
                         {{ .Language.LanguageName }}

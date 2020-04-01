@@ -1,4 +1,7 @@
+{{/* Verify if the current language is Italian  */}}
 {{ if eq .Site.Language.Lang "it" }}
+    {{/* Is Italian */}}
+    {{/* Show the post date in Italian format */}}
     {{ $mymonths := index $.Site.Data.months_it }}
     <aside class="dates">
         {{ .Date.Format "2" }} 
@@ -6,6 +9,8 @@
         {{ .Date.Format "2006" }}
     </aside>
 {{ else }}
+    {{/* Is not Italian */}}
+    {{/* Show the post date in English format */}}
     {{ $mymonths := index $.Site.Data.months_en }}
     <aside class="dates">
         {{ index $mymonths (printf "%d" .Date.Month) }} 
